@@ -7,15 +7,22 @@
     "build": "rm -rf dist && tsc -p tsconfig-build.json && webpack",
     "setup": "ts-node src/server/scripts/checkout-covid-data.ts && ts-node src/server/scripts/read-covid-csv-data.ts data/csse_covid_19_data/csse_covid_19_daily_reports/*.csv",
     "start": "node dist/server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "adityahegderocks@gmail.com",
   "license": "ISC",
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/**/*.spec.ts",
+      "<rootDir>/test/**/*.spec.tsx"
+    ],
+    "preset": "ts-jest"
+  },
   "devDependencies": {
+    "@adityahegde/typescript-test-utils": "^1.2.5",
     "@ant-design/icons": "^4.7.0",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
@@ -34,8 +41,9 @@
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "^17.0.2",
+    "sinon": "^12.0.1",
     "style-loader": "^3.3.1",
+    "ts-jest": "^27.1.2",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4",

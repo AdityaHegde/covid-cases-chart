@@ -11,7 +11,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import {CovidDataResponse} from "../common/models/CovidDataResponse";
+import {CovidDataResponse} from "../../common/models/CovidDataResponse";
 
 ChartJS.register(
   LineElement,
@@ -34,6 +34,6 @@ export function ChartComponent({covidData}: {covidData: CovidDataResponse}) {
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         data: covidData.data,
       }]
-    }} />
+    }} style={{maxHeight: "500px"}} />
   );
 }

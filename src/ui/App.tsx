@@ -1,6 +1,6 @@
 import React from "react";
 import Layout, {Content, Header} from "antd/lib/layout/layout";
-import {CovidCasesChart} from "./CovidCasesChart";
+import {CovidCasesChart} from "./chart/CovidCasesChart";
 
 export function App() {
   return (

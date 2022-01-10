@@ -1,8 +1,7 @@
 import {CSVReader} from "./CSVReader";
 import {CovidDataRow} from "../../../common/models/CovidDataRow";
 import {ICovidDataService} from "../../../common/services/ICovidDataService";
-
-const CSV_FILE_PARSER = /(\d*)-(\d*)-(\d*)\.csv/;
+import {DateFormatUtils} from "../../../common/DateFormatUtils";
 
 export class CovidDataReadWorker {
   private readonly covidDataService: ICovidDataService;
@@ -19,8 +18,7 @@ export class CovidDataReadWorker {
     const csvReader = new CSVReader<Array<CovidDataRow>>();
     const savePromises = new Array<Promise<void>>();
 
-    const [, month, day, year] = CSV_FILE_PARSER.exec(filePath);
-    const date = `${year}-${month}-${day}`;
+    const date = DateFormatUtils.getDateFromFileName(filePath);
 
     console.log("Saving data for", date);
 

@@ -3,15 +3,22 @@ import {waitUntil} from "../../common/asyncWait";
 import {CovidDataMongoDBService} from "../data/services/CovidDataMongoDBService";
 
 let dbConnected = false;
-let worker: CovidDataReadWorker;
+const service = new CovidDataMongoDBService();
+const worker = new CovidDataReadWorker(service);
 
 (async () => {
-  worker = new CovidDataReadWorker(new CovidDataMongoDBService());
   await worker.init();
   dbConnected = true;
 })();
 
-module.exports = async function readCovidData(filePath: string, callback) {
+module.exports.readCovidData = async function readCovidData(filePath: string, callback) {
   if (!dbConnected) await waitUntil(() => dbConnected);
-  worker.readCovidDataFile(filePath).then(callback);
+  await worker.readCovidDataFile(filePath);
+  callback();
+}
+
+module.exports.updateNewCases = async function updateNewCases(date: string, callback) {
+  console.log("Updating new cases for", date);
+  await service.updateNewCases(date);
+  callback();
 }
